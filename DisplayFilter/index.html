@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <a href="../index.html" class="btn btn-secondary mb-3">Back to Home</a>
+      <h1>List</h1>
+      <div id="container">
+        <!-- data will be inserted here by JavaScript -->
+      </div>
+    </div>
+    <!-- Custom JS to import and render data -->
+    <script type="module">
+      import pizzas from "../pizzas.mjs";
+      import prices from "../prices.mjs";
+
+      //makes a new array with the data from the two arrays
+
+      // filter pizza with crust: "yeasted"
+      const pizzasWithYeastedCrust = pizzas.filter(
+        (pizza) => pizza.crust === "yeasted"
+      );
+
+      const data = pizzasWithYeastedCrust;
+
+      const container = document.getElementById("container");
+      const headers = Object.keys(data[0]);
+      const tableTemplate = `
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        ${headers
+                          .map((header) => `<th>${header}</th>`)
+                          .join("")}
+                    </tr>
+                </thead>
+                <tbody>
+                    ${data
+                      .map(
+                        (item) => `
+                        <tr>
+                            ${headers
+                              .map((header) => `<td>${item[header]}</td>`)
+                              .join("")}
+                        </tr>
+                    `
+                      )
+                      .join("")}
+                </tbody>
+            </table>
+        `;
+      container.innerHTML = tableTemplate;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="grandFather">
+      <div class="father">
+        <div class="child">
+          <p id="test">test</p>
+        </div>
+      </div>
+    </div>
+    <script>
+      
+      
+      function closest(element, selector) {
+        // i will check if the element matches the selector
+        if (element.matches(selector)) {
+          // if it matches i will return the element
+          return element;
+        }
+
+        // if it doesn't have the class i will check if the element has a parent
+        if (element.parentElement) {
+          // if it has a parent i will call the function again with the parent element
+          return closest(element.parentElement, selector);
+        }
+        // if the element doesn't have a parent i will return null
+        return null;
+      }
+
+      const ele = closest(document.querySelector("#test"), ".grandFather");
+      console.log(ele);
+    </script>
+  </body>
+</html>
